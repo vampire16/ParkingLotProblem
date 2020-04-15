@@ -1,9 +1,9 @@
 public class ParkingLotService {
     private Object vehicle;
 
-    public boolean park(Object vehicle) {
+    public boolean park(Object vehicle) throws ParkingLotException {
         if(this.vehicle != null)
-            return false;
+            throw new ParkingLotException("Parking lot is full");
         this.vehicle = vehicle;
         return true;
     }
