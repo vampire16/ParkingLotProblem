@@ -1,4 +1,8 @@
-package PACKAGE_NAME;
+public class ParkingLotException extends Exception {
 
-public class ParkingLotException {
+    String message;
+
+    public ParkingLotException(String message) {
+        this.message = message;
+    }
 }
