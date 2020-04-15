@@ -1,5 +1,5 @@
 public class ParkingLotService {
-    public static void main(String[] args){
-        System.out.println("Welcome");
+    public boolean park(Object vehicle) {
+        return true;
     }
 }
