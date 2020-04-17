@@ -1,4 +1,3 @@
-package PACKAGE_NAME;
-
 public class Owner {
+    public static String ParkingLotInfo = null;
 }
