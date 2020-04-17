@@ -24,6 +24,8 @@ public class ParkingLotService {
     public boolean unPark(Object vehicle) {
         if (list.contains(vehicle)) {
             list.remove(vehicle);
+            if (list.size() == 0)
+                Owner.ParkingLotInfo = "Parking lot is empty";
             return true;
         }
         return false;
