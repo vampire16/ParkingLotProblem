@@ -1,4 +1,3 @@
-package PACKAGE_NAME;
-
 public class AirportSecurity {
+    public static String ParkingLotInfo = null;
 }
