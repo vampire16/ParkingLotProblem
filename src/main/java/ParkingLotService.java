@@ -1,16 +1,29 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class ParkingLotService {
     private Object vehicle;
+    public int parkingCapacity;
+    public List list=new ArrayList();
 
-    public boolean park(Object vehicle) throws ParkingLotException {
-        if(this.vehicle != null)
-            throw new ParkingLotException("Parking lot is full");
-        this.vehicle = vehicle;
-        return true;
+    public ParkingLotService(int parkingCapacity) {
+        this.parkingCapacity = parkingCapacity;
+    }
+
+    public boolean park(Object vehicle) {
+        if (list.size() == this.parkingCapacity) {
+            Owner.ParkingLotInfo = "Parking lot is full";
+            AirportSecurity.ParkingLotInfo = "Parking lot is full";
+        } else {
+            list.add(vehicle);
+            return true;
+        }
+        return false;
     }
 
     public boolean unPark(Object vehicle) {
-        if(this.vehicle == vehicle){
-            this.vehicle = null;
+        if (list.contains(vehicle)) {
+            list.remove(vehicle);
             return true;
         }
         return false;
