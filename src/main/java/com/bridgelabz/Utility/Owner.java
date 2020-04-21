@@ -16,15 +16,15 @@ public class Owner implements Observer {
             parkingLotInfo = "Parking lot is empty";
     }
 
-//    public void getUpdatedMap(HashMap<Integer, Object> lotMap) {
-//        this.lotMap = lotMap;
-//    }
-//
-//    public Integer decideParkingSlot() {
-//        for (int i=1;i<=lotMap.size(); i++) {
-//            if (lotMap.get(i) == null)
-//                return i;
-//        }
-//        return null;
-//    }
+    public void getUpdatedMap(HashMap<Integer, Object> lotMap) {
+        this.lotMap = lotMap;
+    }
+
+    public Integer decideParkingSlot() {
+        for (int i=1;i<=lotMap.size(); i++) {
+            if (lotMap.get(i) == null)
+                return i;
+        }
+        return null;
+    }
 }
