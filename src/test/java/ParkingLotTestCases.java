@@ -1,3 +1,7 @@
+import com.bridgelabz.Exception.ParkingLotException;
+import com.bridgelabz.Utility.AirportSecurity;
+import com.bridgelabz.Utility.Owner;
+import com.bridgelabz.service.ParkingLotService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,23 +29,27 @@ public class ParkingLotTestCases {
 
     @Test
     public void givenVehicle_WhenAlreadyParked_ShouldInformOwner() {
+        Owner owner = new Owner();
+        parkingLotService.register(owner);
         try {
             parkingLotService.park(vehicle);
             parkingLotService.park(car);
             parkingLotService.park(bus);
         } catch (ParkingLotException e) {
-            Assert.assertEquals("Parking lot is full", Owner.ParkingLotInfo);
+            Assert.assertEquals("Parking lot is full", Owner.parkingLotInfo);
         }
     }
 
     @Test
     public void givenVehicle_WhenAlreadyParked_ShouldInformAirportSecurity() {
+        AirportSecurity airportSecurity = new AirportSecurity();
+        parkingLotService.register(airportSecurity);
         try {
             parkingLotService.park(vehicle);
             parkingLotService.park(car);
             parkingLotService.park(bus);
         } catch (ParkingLotException e) {
-            Assert.assertEquals("Parking lot is full", AirportSecurity.ParkingLotInfo);
+            Assert.assertEquals("Parking lot is full", AirportSecurity.parkingLotInfo);
         }
     }
 
@@ -52,7 +60,7 @@ public class ParkingLotTestCases {
             parkingLotService.park(car);
             parkingLotService.park(bus);
         } catch (ParkingLotException e) {
-            Assert.assertEquals("Parking lot is full", e.message);
+            Assert.assertEquals(ParkingLotException.Exception.LOT_IS_FULL, e.type);
         }
     }
 
@@ -74,13 +82,15 @@ public class ParkingLotTestCases {
 
     @Test
     public void givenVehicle_WhenUnParkedAllVehicle_ShouldInformOwner() {
+        Owner owner = new Owner();
+        parkingLotService.register(owner);
         try {
             parkingLotService.park(vehicle);
             parkingLotService.park(car);
             parkingLotService.unPark(vehicle);
             parkingLotService.unPark(car);
         } catch (ParkingLotException e) {
-            Assert.assertEquals("Parking lot is empty", Owner.ParkingLotInfo);
+            Assert.assertEquals("Parking lot is empty", Owner.parkingLotInfo);
         }
     }
 
@@ -92,7 +102,7 @@ public class ParkingLotTestCases {
             parkingLotService.unPark(vehicle);
             parkingLotService.unPark(car);
         } catch (ParkingLotException e) {
-            Assert.assertEquals("Parking lot is empty", e.message);
+            Assert.assertEquals(ParkingLotException.Exception.LOT_IS_EMPTY, e.type);
         }
     }
 }
