@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ParkingLotTestCases" tests="8" skipped="0" failures="0" errors="0" timestamp="2020-04-21T12:55:36" hostname="DESKTOP-7UGSU5P" time="0.017">
+<testsuite name="ParkingLotTestCases" tests="8" skipped="0" failures="0" errors="0" timestamp="2020-04-21T14:15:01" hostname="DESKTOP-7UGSU5P" time="0.013">
   <properties/>
   <testcase name="givenVehicle_WhenUnParked_ShouldReturnTrue" classname="ParkingLotTestCases" time="0.004"/>
-  <testcase name="givenVehicle_WhenAlreadyParked_ShouldInformAirportSecurity" classname="ParkingLotTestCases" time="0.003"/>
+  <testcase name="givenVehicle_WhenAlreadyParked_ShouldInformAirportSecurity" classname="ParkingLotTestCases" time="0.006"/>
   <testcase name="givenVehicle_WhenAlreadyParked_ShouldThrowException" classname="ParkingLotTestCases" time="0.0"/>
   <testcase name="givenVehicle_WhenUnParkedAllVehicle_ShouldThrowException" classname="ParkingLotTestCases" time="0.0"/>
-  <testcase name="givenVehicle_WhenParked_ShouldReturnTrue" classname="ParkingLotTestCases" time="0.001"/>
-  <testcase name="givenVehicle_WhenAlreadyParked_ShouldInformOwner" classname="ParkingLotTestCases" time="0.003"/>
+  <testcase name="givenVehicle_WhenParked_ShouldReturnTrue" classname="ParkingLotTestCases" time="0.0"/>
+  <testcase name="givenVehicle_WhenAlreadyParked_ShouldInformOwner" classname="ParkingLotTestCases" time="0.0"/>
   <testcase name="givenVehicle_WhenUnParkedWhichIsNotParked_ShouldReturnFalse" classname="ParkingLotTestCases" time="0.0"/>
   <testcase name="givenVehicle_WhenUnParkedAllVehicle_ShouldInformOwner" classname="ParkingLotTestCases" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
