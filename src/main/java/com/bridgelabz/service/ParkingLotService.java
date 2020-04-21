@@ -3,23 +3,25 @@ package com.bridgelabz.service;
 import com.bridgelabz.Exception.ParkingLotException;
 import com.bridgelabz.Observer.Observer;
 import com.bridgelabz.Observer.Subject;
+import com.bridgelabz.Utility.ParkingAttendant;
+import com.bridgelabz.Utility.ParkingLot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class ParkingLotService implements Subject {
-   ArrayList list = new ArrayList();
     public int parkingCapacity;
     ArrayList<Observer> observers = new ArrayList<>();
     int counter = 0 ;
-//    HashMap<Integer, Object> lotMap;
-//    ParkingPlot parkingPlot;
-//    ParkingAttendant attendant;
+    HashMap<Integer, Object> lotMap;
+    ParkingLot parkingLot;
+    ParkingAttendant attendant = new ParkingAttendant() ;
 
     public ParkingLotService(int parkingCapacity) {
         this.parkingCapacity = parkingCapacity;
-//        parkingPlot = new ParkingPlot(parkingCapacity);
-//        lotMap = parkingPlot.initializeMap();
+        parkingLot = new ParkingLot(parkingCapacity);
+        lotMap = parkingLot.initializeMap();
     }
 
     @Override
@@ -31,7 +33,7 @@ public class ParkingLotService implements Subject {
     public void notifyObservers() {
         for (Iterator<Observer> iterator = observers.iterator(); iterator.hasNext(); ) {
             Observer o = iterator.next();
-            o.sendParkingMessage(list.size(), this.parkingCapacity);
+            o.sendParkingMessage(counter, this.parkingCapacity);
         }
     }
 
@@ -39,20 +41,20 @@ public class ParkingLotService implements Subject {
         if (counter == this.parkingCapacity) {
             throw new ParkingLotException(ParkingLotException.Exception.LOT_IS_FULL);
         }
-        list.add(vehicle);
+        lotMap = attendant.parkVehicle(vehicle, lotMap);
         counter++;
         this.notifyObservers();
         return true;
     }
 
     public boolean unPark(Object vehicle) throws ParkingLotException {
-        if (list.contains(vehicle)) {
-            list.remove(vehicle);
+        if (lotMap.containsValue(vehicle)) {
+            lotMap.remove(vehicle);
             counter--;
+            this.notifyObservers();
             if (counter == 0) {
                 throw new ParkingLotException(ParkingLotException.Exception.LOT_IS_EMPTY);
             }
-            this.notifyObservers();
             return true;
         }
         return false;
