@@ -1,6 +1,7 @@
 import com.bridgelabz.Exception.ParkingLotException;
 import com.bridgelabz.Utility.AirportSecurity;
 import com.bridgelabz.Utility.Owner;
+import com.bridgelabz.Utility.ParkingAttendant;
 import com.bridgelabz.service.ParkingLotService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,6 +12,7 @@ public class ParkingLotTestCases {
     Object car = null;
     Object bus = null;
     ParkingLotService parkingLotService = null;
+    ParkingAttendant attendant = null;
 
 
     @Before
@@ -19,6 +21,7 @@ public class ParkingLotTestCases {
         car = new Object();
         bus = new Object();
         parkingLotService = new ParkingLotService(2);
+        attendant = new ParkingAttendant();
     }
 
     @Test
@@ -68,7 +71,8 @@ public class ParkingLotTestCases {
     public void givenVehicle_WhenUnParked_ShouldReturnTrue() throws ParkingLotException {
         parkingLotService.park(vehicle);
         parkingLotService.park(car);
-        boolean isUnParked = parkingLotService.unPark(vehicle);
+        Integer getSlot = attendant.getMyParkingSlot(vehicle);
+        boolean isUnParked = parkingLotService.unPark(vehicle,getSlot);
         Assert.assertTrue(isUnParked);
     }
 
@@ -76,7 +80,8 @@ public class ParkingLotTestCases {
     public void givenVehicle_WhenUnParkedWhichIsNotParked_ShouldReturnFalse() throws ParkingLotException {
         parkingLotService.park(vehicle);
         parkingLotService.park(car);
-        boolean isUnParked = parkingLotService.unPark(bus);
+        Integer getSlot = attendant.getMyParkingSlot(vehicle);
+        boolean isUnParked = parkingLotService.unPark(bus,getSlot);
         Assert.assertFalse(isUnParked);
     }
 
@@ -86,9 +91,11 @@ public class ParkingLotTestCases {
         parkingLotService.register(owner);
         try {
             parkingLotService.park(vehicle);
+            Integer getSlot = attendant.getMyParkingSlot(vehicle);
+            parkingLotService.unPark(vehicle,getSlot);
             parkingLotService.park(car);
-            parkingLotService.unPark(vehicle);
-            parkingLotService.unPark(car);
+            Integer getSlotCar = attendant.getMyParkingSlot(car);
+            parkingLotService.unPark(car,getSlotCar);
         } catch (ParkingLotException e) {
             Assert.assertEquals("Parking lot is empty", Owner.parkingLotInfo);
         }
@@ -98,9 +105,11 @@ public class ParkingLotTestCases {
     public void givenVehicle_WhenUnParkedAllVehicle_ShouldThrowException() {
         try {
             parkingLotService.park(vehicle);
+            Integer getSlot = attendant.getMyParkingSlot(vehicle);
+            parkingLotService.unPark(vehicle,getSlot);
             parkingLotService.park(car);
-            parkingLotService.unPark(vehicle);
-            parkingLotService.unPark(car);
+            Integer getSlotCar = attendant.getMyParkingSlot(car);
+            parkingLotService.unPark(car,getSlotCar);
         } catch (ParkingLotException e) {
             Assert.assertEquals(ParkingLotException.Exception.LOT_IS_EMPTY, e.type);
         }
