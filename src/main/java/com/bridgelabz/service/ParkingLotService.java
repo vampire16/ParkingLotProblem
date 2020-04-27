@@ -47,9 +47,9 @@ public class ParkingLotService implements Subject {
         return true;
     }
 
-    public boolean unPark(Object vehicle) throws ParkingLotException {
+    public boolean unPark(Object vehicle, Integer parkingSlot) throws ParkingLotException {
         if (lotMap.containsValue(vehicle)) {
-            lotMap.remove(vehicle);
+            lotMap.put(parkingSlot, null);
             counter--;
             this.notifyObservers();
             if (counter == 0) {
